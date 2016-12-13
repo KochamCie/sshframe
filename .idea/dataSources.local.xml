@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - xiaodai@xwjrxidaodaitest.mysql.rds.aliyuncs.com" uuid="cf582d09-086d-45c3-8daa-a3571bf97031">
+      <secret-storage>master_key</secret-storage>
+      <user-name>xiaodai</user-name>
+      <introspection-scope>xiaodai:</introspection-scope>
+      <resolve-scope>xiaodai:</resolve-scope>
+    </data-source>
+  </component>
+</project>
