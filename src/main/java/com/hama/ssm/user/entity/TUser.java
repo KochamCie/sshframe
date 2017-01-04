@@ -33,4 +33,14 @@ public class TUser {
     public void setId(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "TUser{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", age=" + age +
+                '}';
+
+    }
 }

@@ -17,9 +17,10 @@ public class TUserServiceImpl implements  TUserService,Serializable {
     private TUserMapper tUserMapper;
 
     public List<TUser> findAll() throws Exception {
-
-        System.out.println("123"+tUserMapper.toString());
-
         return tUserMapper.findAll();
+    }
+
+    public int saveUser(TUser user) {
+        return tUserMapper.saveUser(user);
     }
 }

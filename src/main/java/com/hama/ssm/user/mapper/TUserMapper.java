@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface TUserMapper {
 
+    List<TUser> findAll() throws  Exception;
 
-    public List<TUser> findAll() throws  Exception;
+    int saveUser(TUser user);
 }

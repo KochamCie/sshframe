@@ -18,4 +18,17 @@
         t_user
 
     </select>
+
+
+    <!-- 插入 - 全字段保存 2015-07-07 14:04:52. -->
+    <insert id="saveUser" parameterType="com.hama.ssm.user.entity.TUser">
+        <selectKey keyProperty="id" resultType="java.lang.String"
+                   order="BEFORE">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+        insert into t_user (id,username, age)
+        values (#{id},  #{username,jdbcType=VARCHAR},  #{age,jdbcType=INTEGER})
+    </insert>
+
+
 </mapper>

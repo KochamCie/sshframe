@@ -35,15 +35,32 @@ public class TUserAPI {
         return map;
     }
 
+    @RequestMapping(value = "/saveUser", method= RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> saveUser(TUser user) throws Exception{
+        Map<String,Object> map = new HashMap<String ,Object>();
+        int affected_rows=tUserService.saveUser(user);
+        if(affected_rows==1){
+            map.put("result",true);
+            map.put("msg","添加成功");
+        }
+        return map;
+    }
+
     public static void syso(Object o){
         System.out.println(o);
     }
 
     public static void main(String args []){
         String a=",; \t\n";
+        String b=".";
         String str="com.hama.ssm";
-        StringTokenizer st = new StringTokenizer(str, a);
-        System.out.println(st.toString());
+        StringTokenizer st = new StringTokenizer(str, b);
+        while (st.hasMoreTokens())
+        {
+            System.out.println(st.nextToken());
+        }
+
 
     }
 }

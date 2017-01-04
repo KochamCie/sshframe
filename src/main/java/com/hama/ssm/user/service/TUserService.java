@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface TUserService {
 
-    public List<TUser> findAll() throws  Exception;
+    List<TUser> findAll() throws  Exception;
 
-
+    int saveUser(TUser user);
 }
