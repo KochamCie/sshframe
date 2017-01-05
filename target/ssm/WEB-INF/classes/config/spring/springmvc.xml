@@ -37,4 +37,8 @@
         <property name="suffix" value=".jsp"/>
     </bean>
     <!--控制器映射器和控制器适配器-->
+    <!--权限控制拦截器-->
+    <mvc:interceptors>
+        <bean class="com.hama.ssm.util.accessControl.AccessInterceptor"></bean>
+    </mvc:interceptors>
 </beans>

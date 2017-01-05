@@ -56,6 +56,13 @@ public class TUserAPI {
     }
 
     public static void main(String args []){
+        TUser user=new TUser();
+        user.setId("111");
+        user.setUsername("222");
+        user.setAge(333);
+
+        syso(user.toString());
+
         String a=",; \t\n";
         String b=".";
         String str="com.hama.ssm";

@@ -20,7 +20,7 @@
     </select>
 
 
-    <!-- 插入 - 全字段保存 2015-07-07 14:04:52. -->
+    <!-- 插入 - 全字段保存 -->
     <insert id="saveUser" parameterType="com.hama.ssm.user.entity.TUser">
         <selectKey keyProperty="id" resultType="java.lang.String"
                    order="BEFORE">

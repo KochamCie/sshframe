@@ -1,9 +1,11 @@
 package com.hama.ssm.user.entity;
 
+import com.hama.ssm.util.base.BaseObject;
+
 /**
  * Created by Administrator on 2016/12/2.
  */
-public class TUser {
+public class TUser extends BaseObject {
 
     private String id;
     private String username;
@@ -34,13 +36,4 @@ public class TUser {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "TUser{" +
-                "id='" + id + '\'' +
-                ", username='" + username + '\'' +
-                ", age=" + age +
-                '}';
-
-    }
 }

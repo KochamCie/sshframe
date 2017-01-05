@@ -20,18 +20,43 @@
       <schema id="9" name="xwjr_xwb"/>
       <schema id="10" name="yzzs"/>
       <table id="11" parent="1" name="t_user"/>
-      <column id="12" parent="11" name="id">
+      <table id="12" parent="1" name="tb_role_permission"/>
+      <table id="13" parent="1" name="tb_role"/>
+      <column id="14" parent="11" name="id">
         <mandatory>1</mandatory>
         <data-type>varchar(255)|0</data-type>
         <default-expression>&apos;&apos;</default-expression>
       </column>
-      <column id="13" parent="11" name="username">
+      <column id="15" parent="11" name="username">
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="14" parent="11" name="age">
+      <column id="16" parent="11" name="age">
         <data-type>int(11)|0</data-type>
       </column>
-      <key id="15" parent="11" name="PRIMARY">
+      <key id="17" parent="11" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="18" parent="12" name="role_id">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)|0</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="19" parent="12" name="permission">
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="20" parent="13" name="id">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)|0</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <column id="21" parent="13" name="name">
+        <data-type>varchar(255)|0</data-type>
+      </column>
+      <column id="22" parent="13" name="description">
+        <data-type>int(11)|0</data-type>
+      </column>
+      <key id="23" parent="13" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
