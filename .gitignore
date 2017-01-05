@@ -1,3 +1,7 @@
+### folder gen
+gen/
+### generator.properties
+generator.properties
 
 ### Maven template  
 target/  
