@@ -2,6 +2,8 @@ package com.hama.ssm.user.controller;
 
 import com.hama.ssm.user.entity.TUser;
 import com.hama.ssm.user.service.TUserService;
+import com.hama.ssm.util.accessControl.AccessControl;
+import com.hama.ssm.util.accessControl.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +27,7 @@ public class TUserAPI {
     private TUserService tUserService;
 
     @RequestMapping(value = "/findAll", method= RequestMethod.GET)
+    @AccessControl({Permission.USER_LIST,Permission.USER_ADD})
     @ResponseBody
     public Map<String,Object> findAll() throws Exception{
         Map<String,Object> map = new HashMap<String ,Object>();
@@ -36,6 +39,7 @@ public class TUserAPI {
     }
 
     @RequestMapping(value = "/saveUser", method= RequestMethod.POST)
+    @AccessControl(Permission.USER_ADD)
     @ResponseBody
     public Map<String,Object> saveUser(TUser user) throws Exception{
         Map<String,Object> map = new HashMap<String ,Object>();
