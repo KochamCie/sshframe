@@ -5,11 +5,23 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 <!--context-dispatcher-->
-    <mvc:annotation-driven />
+
+
+
 
     <!-- 扫描web包，应用Spring的注解 @Controller -->
-    <!-- 具体的包可以使spring在加载时不扫描没有必要的包 -->
-    <context:component-scan base-package="com.hama.ssm.**.controller" />
+    <context:component-scan base-package="com.hama.ssm.**.web" />
+    <!-- 静态资源(js、image等)的访问 -->
+    <mvc:default-servlet-handler/>
+
+    <!-- 静态资源访问（不拦截此目录下的东西的访问）-->
+   <!-- <mvc:resources location="/css/"  mapping="/css/**" />
+    <mvc:resources location="/font-awesome/" mapping="/font-awesome/**"/>
+    <mvc:resources location="/js/" mapping="/js/**"/>-->
+
+    <!-- 开启注解 -->
+    <mvc:annotation-driven />
+
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="mappingJacksonHttpMessageConverter"
@@ -30,12 +42,46 @@
         </property>
     </bean>
 
+    <!--<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">-->
+    <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <!-- 每个页面都引用 -->
+        <property name="exposeRequestAttributes" value="true" />
+        <!-- 页面类型 -->
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <!-- 前缀 -->
+        <property name="prefix" value="" />
+        <!-- 后缀 -->
+        <property name="suffix" value=".html" />
+        <!-- 每个页面都引用 -->
+        <!--<property name="layoutUrl" value="layout.vm" />-->
+        <!-- 当前项目域名(IP)加端口号,html页面引用${rc.contextPath}-->
+        <property name="requestContextAttribute" value="rc" />
+        <!--第一个匹配的是freemarker的视图解析器，如果匹配不成功，则自动选择order=1的其他解析器-->
+        <property name="order" value="0" />
+    </bean>
 
-    <!--视图渲染-->
+
+    <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath">
+            <value>pages</value>
+        </property>
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">UTF-8</prop>
+                <prop key="output.encoding">UTF-8</prop>
+                <prop key="contentType">text/html;charset=UTF-8</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--jsp视图渲染-->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="order" value="1" />
     </bean>
+
     <!--控制器映射器和控制器适配器-->
     <!--权限控制拦截器-->
     <mvc:interceptors>

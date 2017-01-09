@@ -1,4 +1,4 @@
-package com.hama.ssm.user.controller;
+package com.hama.ssm.user.web;
 
 import com.hama.ssm.user.entity.TUser;
 import com.hama.ssm.user.service.TUserService;
@@ -6,7 +6,6 @@ import com.hama.ssm.util.accessControl.AccessControl;
 import com.hama.ssm.util.accessControl.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,13 +26,13 @@ public class TUserAPI {
     private TUserService tUserService;
 
     @RequestMapping(value = "/findAll", method= RequestMethod.GET)
-    @AccessControl({Permission.USER_LIST,Permission.USER_ADD})
+    //@AccessControl({Permission.USER_LIST,Permission.USER_ADD})
     @ResponseBody
     public Map<String,Object> findAll() throws Exception{
         Map<String,Object> map = new HashMap<String ,Object>();
         List<TUser> list = tUserService.findAll();
         map.put("list" , list);
-        syso(list.toString());
+        //syso(list.toString());
 
         return map;
     }
@@ -69,9 +68,14 @@ public class TUserAPI {
         StringTokenizer st = new StringTokenizer(str, b);
         while (st.hasMoreTokens())
         {
-            System.out.println(st.nextToken());
+            //System.out.println(st.nextToken());
         }
 
+    }
 
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    public String getIndexHtml(){
+
+        return "template/index";
     }
 }

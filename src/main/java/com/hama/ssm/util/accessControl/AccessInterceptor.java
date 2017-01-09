@@ -26,18 +26,26 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
     }
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        syso("1111111111");
-        HandlerMethod handler2=(HandlerMethod) handler;
+
+        HandlerMethod handler2=null;
+
+        if (handler instanceof HandlerMethod) {
+            handler2 = (HandlerMethod) handler;
+        } else {
+            // 请求中可能会有请求js css的，此时转型会报错
+            return true;
+        }
         AccessControl fireAuthority = handler2.getMethodAnnotation(AccessControl.class);
 
         if(null == fireAuthority){
-            //没有声明权限,放行
+            //接口没有声明权限,放行
             return true;
         }
 
 
         HttpSession session = request.getSession();
         //Worker manager = (Worker)session.getAttribute(SessionHelper.WorkerHandler);
+        session.getAttribute("employee");
         boolean aflag = false;
 
         for(Permission at:fireAuthority.value()){
