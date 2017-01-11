@@ -72,10 +72,4 @@ public class TUserAPI {
         }
 
     }
-
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String getIndexHtml(){
-
-        return "template/index";
-    }
 }

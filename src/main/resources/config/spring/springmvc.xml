@@ -6,21 +6,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 <!--context-dispatcher-->
 
-
+    <!-- 开启注解 -->
+    <mvc:annotation-driven />
 
 
     <!-- 扫描web包，应用Spring的注解 @Controller -->
     <context:component-scan base-package="com.hama.ssm.**.web" />
     <!-- 静态资源(js、image等)的访问 -->
-    <mvc:default-servlet-handler/>
+    <!--<mvc:default-servlet-handler/>-->
 
     <!-- 静态资源访问（不拦截此目录下的东西的访问）-->
-   <!-- <mvc:resources location="/css/"  mapping="/css/**" />
+    <mvc:resources location="/css/"  mapping="/css/**" />
     <mvc:resources location="/font-awesome/" mapping="/font-awesome/**"/>
-    <mvc:resources location="/js/" mapping="/js/**"/>-->
-
-    <!-- 开启注解 -->
-    <mvc:annotation-driven />
+    <mvc:resources location="/js/" mapping="/js/**"/>
+    <mvc:resources location="/fonts/" mapping="/fonts/**"/>
+    <mvc:resources location="/" mapping="/**/*.html"/>
 
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
@@ -42,6 +42,11 @@
         </property>
     </bean>
 
+    <!--控制器映射器和控制器适配器-->
+    <!--权限控制拦截器-->
+<!--    <mvc:interceptors>
+        <bean class="com.hama.ssm.util.accessControl.AccessInterceptor"></bean>
+    </mvc:interceptors>-->
     <!--<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">-->
     <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
         <!-- 每个页面都引用 -->
@@ -82,9 +87,4 @@
         <property name="order" value="1" />
     </bean>
 
-    <!--控制器映射器和控制器适配器-->
-    <!--权限控制拦截器-->
-    <mvc:interceptors>
-        <bean class="com.hama.ssm.util.accessControl.AccessInterceptor"></bean>
-    </mvc:interceptors>
 </beans>
