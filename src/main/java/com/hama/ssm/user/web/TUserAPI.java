@@ -32,8 +32,6 @@ public class TUserAPI {
         Map<String,Object> map = new HashMap<String ,Object>();
         List<TUser> list = tUserService.findAll();
         map.put("list" , list);
-        //syso(list.toString());
-
         return map;
     }
 
