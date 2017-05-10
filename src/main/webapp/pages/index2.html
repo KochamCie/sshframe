@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>借款笔数</title>
+    <script src="jquery-2.0.3.min.js"></script>
+    <!-- 引入 echarts.js -->
+    <script src="echarts.common.min.js"></script>
+
+</head>
+<body>
+<div>
+    <input type="text" value="2016/7" id="sufurl" placeholder="eg. 2016/7" onkeypress="getKey()">
+    <input type="button" value="请求数据" id="btn" onclick="show()">
+</div>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 800px;height:600px;float: left"></div>
+<div style="float: left">
+    <ul>
+        <!--<li>1  累计成交额  TotalTurnover             </li>
+        <li>2  贷款余额  TotalDueIn                 </li>
+        <li>3  投资人总收益  TotalAmountInterest      </li>
+        <li>4  累计注册用户数  TotalRegisterCount      </li>
+        <li>5  累计投资笔数  TotalInvestCount         </li>
+        <li>6  累计借款笔数  TotalLoanCount           </li>-->
+        <h4>于海瑶：</h4>
+        <li name="7" style="cursor: pointer;">7 借款人数 LoanerAmount</li>
+        <br>
+        <li name="8" style="cursor: pointer;">8 借款笔数 LoanAmount</li>
+        <br>
+        <li name="9" style="cursor: pointer;">9 平均借款期限 LoanAvgDuration</li>
+        <br>
+        <li name="10" style="cursor: pointer;">10 前十大借款人待还占比 LoanTopRepayPercent</li>
+        <br>
+        <br><br>
+        <hr>
+        <br><br>
+        <h3>叶涛:</h3>
+        <li name="11" style="cursor: pointer;">11 出借人数 InvestorAmount</li>
+        <br>
+        <li name="12" style="cursor: pointer;">12 人均出借金额 InvestAvgAmount</li>
+        <br>
+        <li name="13" style="cursor: pointer;">13 前十大出借人待收占比 InvestTopRepayPercent</li>
+        <br>
+        <li name="14" style="cursor: pointer;">14 出借人性别分布 InvestSexDistribution</li>
+        <br>
+        <li name="15" style="cursor: pointer;">15 出借人年龄分布 InvestAgeDistribution</li>
+
+        <br>
+        <!--<li>14 更新截止日期   DataUpdateDeadline      </li>-->
+    </ul>
+    <br>
+    <h2>年份:</h2>
+    <input type="radio" name="year" value="2015">2015
+    <input type="radio" name="year" value="2016" checked>2016
+    <input type="radio" name="year" value="2017">2017
+
+</div>
+<script type="text/javascript">
+
+    $("ul li").each(function () {
+        $(this).bind('click', function () {
+            var dtype = $(this).attr("name");
+            var year = $("input:radio[name='year']:checked").val();
+            $("#sufurl").val(year + "/" + dtype);
+            getData(year + "/" + dtype);
+
+        })
+    });
+
+    function show() {
+        getData();
+
+    }
+    function getKey() {
+        if (event.keyCode == 13) {
+            getData();
+        }
+    }
+
+    $(function () {
+        getData();
+    })
+
+
+    function getData(url) {
+        var sufurl;
+        if (undefined == url) {
+            sufurl = $("#sufurl").val();
+        } else {
+            sufurl = url;
+        }
+        var myChart = echarts.init(document.getElementById('main'));
+        var url = 'http://p2papi.xwjrfw.cn:8080/P2PSystem/InfoDisclosure/show/' + sufurl;
+        var data = {};
+        var type = 'GET';
+        var dataType = 'json';
+        $.ajax({
+            url: url,
+            type: type,
+            data: data,
+            dataType: dataType,
+            success: function (data) {
+                console.log(data);
+                var ho = data.content;
+                if (ho == ""){
+                    alert(data.message);
+                    return;
+                }
+                // 指定图表的配置项和数据
+                var option = ho;
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
+        });
+    }
+</script>
+</body>
+</html>

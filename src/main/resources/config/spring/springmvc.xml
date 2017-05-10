@@ -23,9 +23,9 @@
     <mvc:resources location="/vendor/" mapping="/vendor/**"/>
 -->
 
-    <mvc:resources location="/" mapping="/**/*.html"/>
-    <mvc:resources location="/" mapping="/**/*.js"/>
-    <mvc:resources location="/" mapping="/**/*.css"/>
+    <mvc:resources location="/pages/" mapping="/**/*.html"/>
+    <mvc:resources location="/js/" mapping="/**/*.js"/>
+    <mvc:resources location="/pages/" mapping="/**/*.css"/>
 
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
@@ -85,11 +85,13 @@
     </bean>
 
     <!--jsp视图渲染-->
+<!--
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="order" value="1" />
     </bean>
+-->
 
 </beans>

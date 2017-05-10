@@ -1,6 +1,5 @@
 package com.hama.ssm.frame.web;
 
-import com.hama.ssm.user.entity.TUser;
 import com.hama.ssm.user.service.TUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 /**
  * Created by rns on 2017/1/11.
  */
@@ -20,7 +16,7 @@ import java.util.List;
 public class FrameAPI {
 
     private static final Logger logger = LoggerFactory.getLogger(FrameAPI.class);
-    private static final String back_package="sbadmin2/";
+    private static final String back_package="/";
 
     @Autowired
     private TUserService tUserService;
@@ -32,7 +28,7 @@ public class FrameAPI {
         String a=Thread.currentThread().getStackTrace()[1].getMethodName();
         ModelAndView model = new ModelAndView();
         try {
-            model.setViewName(back_package+"index/index");
+            model.setViewName(back_package+"index");
         } catch (Exception e) {
             model.addObject("exception", e.getMessage());
             model.setViewName("/error");
