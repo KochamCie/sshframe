@@ -37,6 +37,12 @@ public class FrameAPI {
         return model;
     }
 
+    @RequestMapping(value = "/medo",method = RequestMethod.GET)
+    public Object medo(){
+        // 当前方法名
+        String a=Thread.currentThread().getStackTrace()[1].getMethodName();
+        return back_package+"medo";
+    }
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public Object index2(){

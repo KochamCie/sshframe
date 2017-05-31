@@ -1,0 +1,33 @@
+
+#account_settings .control-label {
+    width: 80px;
+}
+#account_settings .controls {
+    margin-left: 100px;
+}
+#account_settings .help-block,
+#account_settings input {
+    float: left;
+}
+#account_settings .help-block {
+    margin-top: 5px;
+}
+#account_settings #getMobileCapcha {
+    margin-left: 10px;
+    height: 30px;
+    background: #f9f9f9;
+    color: #585858;
+    border: 1px solid #e5e5e5;
+    font-size: 12px;
+    padding: 0 10px;
+}
+#account_settings #getMobileCapcha:hover {
+    background: #eee;
+}
+#account_settings #getMobileCapcha:disabled {
+    background: #e0e0e0;
+    color: #888;
+}
+
+@media only screen and (max-width: 1155px) {
+}
