@@ -17,8 +17,8 @@ public class T {
         //p(isAccessable(500));
         //p(isAccessable(5000000));
         //p(getResult(1230910000));
-        String str = "01230009101000";
-        p(str.replaceAll("0+?$",""));
+        p(new Date(1493568000000L));
+        p(new Date(1496246399000L));
     }
 
     private static int getResult(int num){

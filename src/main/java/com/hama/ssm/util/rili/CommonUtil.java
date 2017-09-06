@@ -18,6 +18,8 @@ import java.util.List;
  */
 public class CommonUtil {
 
+    private static int index = 15769;
+
     private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
     private static String latestVocationName = "";
@@ -25,18 +27,29 @@ public class CommonUtil {
     private static HtmlPage originPage = null;
 
     public static void main(String[] args) throws Exception {
+        p("start /////");
         // 当月
         HtmlPage currenPage = getOriginPage("http://hao.360.cn/rili/");
+
         //List<ChinaDate> dateList = new CommonUtil().getMonthInfo(currenPage);
         for (String str : createSql(getMonthInfo(currenPage))) {
             p(str);
         }
+        for (String str : createSqlForXwb(getMonthInfo(currenPage))) {
+            p(str);
+        }
+        System.out.println("下个月:");
 
-        // 下个月
+       /* // 下个月
         HtmlPage nextPage = getNextPage(originPage);
+        //DomNodeList<HtmlElement> htmlElements = nextPage.getElementById("M-dates").getElementsByTagName("li");
+
         for (String str : createSql(getMonthInfo(nextPage))) {
             p(str);
         }
+        for (String str : createSqlForXwb(getMonthInfo(nextPage))) {
+            p(str);
+        }*/
     }
 
     /**
@@ -87,16 +100,20 @@ public class CommonUtil {
      */
     public static List<ChinaDate> getMonthInfo(HtmlPage page) throws  ParseException {
         List<ChinaDate> dateList = new ArrayList<ChinaDate>();
+        //p(page.asText());
         DomNodeList<HtmlElement> htmlElements = page.getElementById("M-dates").getElementsByTagName("li");
+
         return analysis(htmlElements, dateList);
     }
 
     public static HtmlPage getNextPage(HtmlPage page) throws IOException {
         // 获取下一个月按钮
+
         DomNodeList<HtmlElement> hrefList = page.getElementById("M-controls").getElementsByTagName("a");
         return hrefList.get(3).click();
     }
 
+/*
 
     public List<ChinaDate> getCurrentDateInfo() {
         WebClient webClient = null;
@@ -125,7 +142,7 @@ public class CommonUtil {
             for (HtmlElement element2 : hrefList) {
                 if (i == 3) {
                     HtmlPage page2 = element2.click();
-                    p("点击获取下个月:" + element2.toString());
+                    p("点击获取下个月点击获取下个月:" + element2.toString());
                     DomNodeList<HtmlElement> htmlElements2 = page2.getElementById("M-dates").getElementsByTagName("li");
                     p(htmlElements2.size());
                     dateList = analysis(htmlElements2, dateList);
@@ -143,6 +160,7 @@ public class CommonUtil {
         }
         return dateList;
     }
+*/
 
 
     /**
@@ -228,6 +246,40 @@ public class CommonUtil {
         }
         return sqlList;
     }
+
+
+
+
+    /**
+     * 拼接生成希望宝sql语句
+     *
+     * @param dateList
+     * @return
+     */
+    public static List<String> createSqlForXwb(List<ChinaDate> dateList) {
+        List<String> sqlList = new ArrayList<String>();
+        if (dateList.size() == 0) {
+            sqlList.add("页面解析失败，无信息");
+            return sqlList;
+        } else {
+            sqlList.add("当月天数： size:" + dateList.size());
+        }
+        int i = index;
+        for (ChinaDate date : dateList) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String dateStr = sdf.format(date.getSolarDate());
+            String groupStr = dateStr.substring(0, 6);
+            if (!date.isWorkFlag()) {
+                sqlList.add("INSERT INTO `topenday` VALUES ('"+(i++)+"', '"+dateStr+"', '0');");
+            } else {
+                sqlList.add("INSERT INTO `topenday` VALUES ('"+(i++)+"', '"+dateStr+"', '1');");
+            }
+        }
+        return sqlList;
+    }
+
+
+
 
     /**
      * 获取假期名称
